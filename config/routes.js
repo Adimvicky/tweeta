@@ -34,6 +34,7 @@ module.exports.routes = {
 
   'POST /tweets' : 'TweetController.postTweet',
   'PUT /tweets/like' : 'TweetController.likeOrUnlikeTweet',
+  'PUT /tweets/retweet' : 'TweetController.retweet',
 
   'GET /chat' : 'ChatRoomController.joinChat',
   'PUT /chat' : 'ChatRoomController.sendChat'

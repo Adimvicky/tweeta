@@ -57,6 +57,8 @@ i.fa {
         </div>
         </div>
         
+        
+        
         <div class="dropdown">
         <div class="circle border flex items-center justify-center" title="Message" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -78,6 +80,7 @@ i.fa {
         </div>
       </div>
       </div>
+     
     
       <div class="">
         <img src="https://image.flaticon.com/icons/png/512/196/196970.png" style="height : 40px"/>
@@ -103,9 +106,11 @@ i.fa {
     
       </div>
     </header>
+   
     
     <main class="flex flex-column items-center">
       <div class="categorybar">
+          
         <div class="category category-selected" id="getTweetsBtn">
           <span class="title center">TWEETS</span>
           <span class="count center"><%= tweets.length %></span>
@@ -123,6 +128,7 @@ i.fa {
           <span class="count center"><%= userCount %></span>
         </div>
       </div>
+      
     <div id="container">
     
 
@@ -155,7 +161,9 @@ i.fa {
             <div class="flex justify-between">
               <div class="left-icons flex justify-around">
                 <i class="fa fa-share" aria-hidden="true"></i>
-                <i class="fa fa-refresh" aria-hidden="true"> </i>
+                <i class="fa fa-retweet retweetBtn <%- tweet.retweetedByLoggedInUser ? 'retweeted' : '' %>" aria-hidden="true" data-tweet="<%= tweet.id %>"> 
+                <%- tweet.retweets > 0 ? tweet.retweets : '' %>
+                </i>
                 <i class="fa fa-heart likeOrUnlikeButton <%- tweet.likedByLoggedInUser ? 'unlikeBtn liked' : 'likeBtn' %>" aria-hidden="true" data-tweet="<%= tweet.id %>">
                 <%- tweet.likes > 0 ? tweet.likes : '' %>
                 </i>
@@ -220,36 +228,7 @@ i.fa {
 
 <div id="chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
                         <div id="chat_box" class="chat_box touchscroll chat_box_colors_a">
-                            <div class="chat_message_wrapper">
-                                <div class="chat_user_avatar">
-                                    <a href="https://web.facebook.com/iamgurdeeposahan" target="_blank">
-                                    <img alt="" src="http://webncc.in/img/user/gurdeep-singh-osahan.jpg" class="md-user-image">
-                                    </a>
-                                </div>
-                                <ul class="chat_message">
-                                    <li>
-                                        <p> 
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, eum?
-                                        <span class="chat_message_time">13:38</span>
-                                         </p>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="chat_message_wrapper chat_message_right">
-                                <div class="chat_user_avatar">
-                                <a href="https://web.facebook.com/iamgurdeeposahan" target="_blank" >
-                                    <img alt="" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" class="md-user-image">
-                                </a>
-                                </div>
-                                <ul class="chat_message">
-                                    <li>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, hahaha consectetur adipisicing m.
-                                            <span class="chat_message_time">13:34</span>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
+                            
                             
                         </div>
                     </div>

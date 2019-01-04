@@ -17,6 +17,10 @@ module.exports = {
     likedBy : {
       collection : 'user',
       via : 'likedTweets'
+    },
+    retweetedBy : {
+      collection : 'user',
+      via : 'retweets'
     }
 
   },

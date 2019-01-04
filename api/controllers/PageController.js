@@ -13,19 +13,28 @@ module.exports = {
       .limit(30)
       .populate('owner')
       .populate('likedBy')
+      .populate('retweetedBy')
       .exec((err,tweets) => {
           if(err) return res.json({error : 'An error ocurred trying to fetch tweets'});
           if(!tweets) return res.json('No tweets');
 
-
           _.each(tweets,(tweet) => {
               tweet.created = sails.helpers.gettimeago(tweet.createdAt);
               tweet.likes = tweet.likedBy.length;
+              tweet.retweets = tweet.retweetedBy.length;
+
               for(let liker of tweet.likedBy){
                   if(liker.id === req.session.userId){
                       tweet.likedByLoggedInUser = true;
                   } else {
                       tweet.likedByLoggedInUser = false;
+                  }
+              }
+              for(let retweeter of tweet.retweetedBy){
+                  if(retweeter.id === req.session.userId){
+                      tweet.retweetedByLoggedInUser = true;
+                  } else {
+                      tweet.retweetedByLoggedInUser = false;
                   }
               }
           })

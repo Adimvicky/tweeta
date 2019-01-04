@@ -31,6 +31,10 @@ module.exports = {
       collection : 'tweet',
       via : 'owner'
     },
+    retweets : {
+      collection : 'tweet',
+      via : 'retweetedBy'
+    },
     followers : {
       collection : 'user',
       via : 'following'

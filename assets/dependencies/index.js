@@ -303,7 +303,55 @@ $('.likeOrUnlikeButton').click(e => {
     .catch(err => {
         toastr.error('Sorry, there was a problem with the request','An error occured')  
     })   
-})
+});
+
+
+
+$('.retweetBtn').click(e => {
+    let tweetToRetweet = e.target.getAttribute('data-tweet');
+    let button = $(e.target);
+    let numRetweets = button.html();
+    let data = {};
+    data.tweetToRetweet = tweetToRetweet; 
+
+    let buttonClassList = Array.from(e.target.classList);
+    
+    if(buttonClassList.includes('retweeted')){
+        return toastr.error('You already retweeted this tweet');
+        // data.action = 'like'
+        // button.addClass('liked')
+        // button.addClass('unlikeBtn')
+        // button.removeClass('likeBtn')    
+        // button.html(` ${Number(numLikes) + 1}`);
+        
+    } else {
+        data.action = 'retweet'
+        button.addClass('retweeted')
+        button.html(` ${Number(numRetweets) + 1}`)
+
+         // button.removeClass('unlikeBtn')
+        // button.addClass('likeBtn')
+        
+    }
+    console.log(data);
+       
+    $.ajax({
+        url : '/tweets/retweet',
+        method : 'PUT',
+        data : data 
+    })
+    .done(response => {
+        if(response.data){
+            console.log(response.data)
+        } else if(response.error){
+            return toastr.error(response.error,'An error ocurred');
+        }
+    })
+    .catch(err => {
+        toastr.error('Sorry, there was a problem with the request','An error occured')  
+    })   
+});
+
 
 
 let currentlyOpenChatRoom, chatMate;
