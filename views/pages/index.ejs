@@ -1,0 +1,293 @@
+<html>
+  <head>
+     
+  </head>
+  <body>
+  <%- exposeLocalsToBrowser() %>
+  <style>
+  ::-webkit-input-placeholder { 
+  text-align : left;
+}
+i.fa {
+  cursor : pointer;
+}
+.liked {
+  color : red;
+}
+  </style>
+ 
+    
+  <script>
+  
+
+   var me = window.SAILS_LOCALS.me ? window.SAILS_LOCALS.me : null;
+   var tweets = window.SAILS_LOCALS.tweets
+   var userCount = window.SAILS_LOCALS.userCount
+   var users = window.SAILS_LOCALS.users
+   var followers = window.SAILS_LOCALS.me.followers.length
+   var following = window.SAILS_LOCALS.me.following.length
+
+   
+   
+
+
+   console.log(me);
+   console.log(tweets);
+   console.log(users);
+   
+
+  </script>
+    <header class="flex items-center sticky-top">
+      <div class="flex items-center justify-center">
+      
+        <div id="sign-in">
+        <a href="/login">
+        <div class="circle border flex items-center justify-center" title="Sign in">
+          <i class="fa fa-sign-in" aria-hidden="true"></i>
+        </div>
+        </a>
+        </div>
+        
+      
+      <div class="flex items-center justify-center">
+        <div class="feather">
+        <div class="circle border flex items-center justify-center" data-toggle="modal" data-target="#exampleModalCenter" style="cursor : pointer" title="Tweet now">
+          <i class="fa fa-leaf" aria-hidden="true">     
+          </i>
+        </div>
+        </div>
+        
+        <div class="dropdown">
+        <div class="circle border flex items-center justify-center" title="Message" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+ <% if(users){ %>
+  <%  for(let user of users){ %>
+      <a class="dropdown-item openChat" href="#" data-user="<%= user.id %>">
+      <div class="chat-user-avatar" style="display : inline"> 
+      <img src="<%= user.gravatarURL %>" class="md-user-image">
+       </div> 
+        <%= user.handle %>
+       </a>
+
+  <%  } %>
+ <% } %>
+    
+  </div>
+</div>
+        </div>
+      </div>
+      </div>
+    
+      <div class="">
+        <img src="https://image.flaticon.com/icons/png/512/196/196970.png" style="height : 40px"/>
+      </div>
+      
+      <div class="flex items-center justify-center">
+        <div id="search" class="flex items-center justify-between border">
+        <input type="text" id="search-input" class="" placeholder="Search">
+       
+      </div>
+         <% if(me) {%> 
+      <div class="circle border flex items-center justify-center" title="You">
+       <img class="circle border" src="<%= me.gravatarURL %>" /> 
+      </div>
+     <div id="sign-out">
+      <a href="/logout">
+        <div class="circle border flex items-center justify-center" title="Sign out">
+          <i class="fa fa-sign-out" aria-hidden="true"></i>
+        </div>
+      </a>
+      </div>
+       <% } %>
+    
+      </div>
+    </header>
+    
+    <main class="flex flex-column items-center">
+      <div class="categorybar">
+        <div class="category category-selected" id="getTweetsBtn">
+          <span class="title center">TWEETS</span>
+          <span class="count center"><%= tweets.length %></span>
+        </div>
+        <div class="category" id="getFollowingBtn">
+          <span class="title center">FOLLOWING</span>
+          <span class="count center" id="following">0</span>
+        </div>
+        <div class="category" id="getFollowersBtn">
+          <span class="title center">FOLLOWERS</span>
+          <span class="count center" id="followers">0</span>
+        </div>
+        <div class="category" id="getUsersBtn">
+          <span class="title center">USERS</span>
+          <span class="count center"><%= userCount %></span>
+        </div>
+      </div>
+    <div id="container">
+    
+
+      <div class="tweets">
+     <% if(tweets){ %>
+     <%  for(let tweet of tweets) { %>
+        <div class="tweet flex justify-between">
+          <div class="tweet-pic circle border flex items-center justify-center">
+            <img class="circle border" src="<%=  tweet.owner.gravatarURL %>" style="height : 47px"/> 
+          </div>
+          <div  class="tweet-content">
+            <div class="flex justify-between">
+              <div>
+                <span class="name">
+                  <%= tweet.owner.username %>
+                </span>
+                <span class="handle">
+                  <%= tweet.owner.handle %>
+                </span>
+              </div>
+              <div class="when">
+                <%= tweet.created %>
+              </div>
+            </div>
+            <div class="actual-content">
+              <p style="color : black">
+              <%= tweet.message %>
+              </p> 
+            </div>
+            <div class="flex justify-between">
+              <div class="left-icons flex justify-around">
+                <i class="fa fa-share" aria-hidden="true"></i>
+                <i class="fa fa-refresh" aria-hidden="true"> </i>
+                <i class="fa fa-heart likeOrUnlikeButton <%- tweet.likedByLoggedInUser ? 'unlikeBtn liked' : 'likeBtn' %>" aria-hidden="true" data-tweet="<%= tweet.id %>">
+                <%- tweet.likes > 0 ? tweet.likes : '' %>
+                </i>
+                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+              </div>
+              <div>
+                <i class="fa fa-expand" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+       <% } %>
+
+
+     <% } %>
+       
+      </div>
+    </div>
+    </main>
+    <footer>
+    </footer>
+
+
+
+
+<!-- Tweet Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">New tweet</h5>
+      </div>
+      
+      <div class="modal-body">
+      <textarea class="form-control" placeholder="What's happening?" id="tweet"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">&times;</button>
+        <button type="button" class="btn btn-primary" id="tweetBtn">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+        </button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<!-- Tweet Modal -->
+
+
+<!-- Message pop up -->
+<aside id="sidebar_secondary" class="tabbed_sidebar ng-scope chat_sidebar" style="background : #78A7CE;">
+
+<div class="popup-head">
+ Your chat with <span id="otherUser"></span>
+    	
+					  <div class="popup-head-right pull-right">
+                    
+						<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="fa fa-remove"></i></button>
+                      </div>
+			  </div>
+
+<div id="chat" class="chat_box_wrapper chat_box_small chat_box_active" style="opacity: 1; display: block; transform: translateX(0px);">
+                        <div id="chat_box" class="chat_box touchscroll chat_box_colors_a">
+                            <div class="chat_message_wrapper">
+                                <div class="chat_user_avatar">
+                                    <a href="https://web.facebook.com/iamgurdeeposahan" target="_blank">
+                                    <img alt="" src="http://webncc.in/img/user/gurdeep-singh-osahan.jpg" class="md-user-image">
+                                    </a>
+                                </div>
+                                <ul class="chat_message">
+                                    <li>
+                                        <p> 
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, eum?
+                                        <span class="chat_message_time">13:38</span>
+                                         </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="chat_message_wrapper chat_message_right">
+                                <div class="chat_user_avatar">
+                                <a href="https://web.facebook.com/iamgurdeeposahan" target="_blank" >
+                                    <img alt="" src="http://bootsnipp.com/img/avatars/bcf1c0d13e5500875fdd5a7e8ad9752ee16e7462.jpg" class="md-user-image">
+                                </a>
+                                </div>
+                                <ul class="chat_message">
+                                    <li>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, hahaha consectetur adipisicing m.
+                                            <span class="chat_message_time">13:34</span>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+<div class="chat_submit_box">
+    <div class="uk-input-group">
+        <div class="gurdeep-chat-box">
+       
+        <input type="text" placeholder="Type a message" id="submit_message" name="submit_message" class="md-input">
+       
+        </div>
+    
+    <span class="uk-input-group-addon">
+    <a href="#" id="sendChat"><i class="fa fa-send" style="color : white; margin-right : 40px; font-size: 20px;
+    margin-top: 12px;
+    margin-left: 12px;"></i></a>
+    </span>
+    </div>
+</div>
+</aside>
+<!-- Message pop up end -->
+<script>
+$('#followers').html(followers);
+$('#following').html(following);
+
+document.getElementById('sidebar_secondary').style.display = 'none';
+
+$(function(){
+$(".openChat").click(function () {
+  $('#sidebar_secondary').addClass('popup-box-on');
+    });
+  
+    $("#removeClass").click(function () {
+  $('#sidebar_secondary').removeClass('popup-box-on');
+
+  document.getElementById('sidebar_secondary').style.display = 'none';
+
+    });
+})
+</script>
+  </body>
+</html>
