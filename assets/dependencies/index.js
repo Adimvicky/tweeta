@@ -421,11 +421,15 @@ $('#sendChat').click(e => {
     
     io.socket.put('/chat',{message,currentlyOpenChatRoom,chatMate},(response,jwres) => {
         console.log(response,jwres);
+        if(!response){
+            toastr.error(response.error,'Could not send message');
+        }
         if(response.data){
             $('#submit_message').val('')
         } else {
             return toastr.error(response.error,'Could not send message');
         }
+       
     })
 })
 
@@ -433,7 +437,6 @@ $('#sendChat').click(e => {
 io.socket.on('chat',e => {
     console.log('new chat event ',e);
     if(e.sender === me.id){
-        notification.play();
         $('#chat_box').append(`
         <div class="chat_message_wrapper chat_message_right">
             <div class="chat_user_avatar">
@@ -450,6 +453,7 @@ io.socket.on('chat',e => {
     `)
 
     } else {
+        notification.play();
         $('#chat_box').append(`
             <div class="chat_message_wrapper">
                 <div class="chat_user_avatar">
