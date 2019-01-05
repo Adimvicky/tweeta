@@ -65,7 +65,7 @@ i.fa {
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
  <% if(users){ %>
   <%  for(let user of users){ %>
-      <a class="dropdown-item openChat" href="#" data-user="<%= user.id %>">
+      <a class="dropdown-item openChat"  data-user="<%= user.id %>">
       <div class="chat-user-avatar" style="display : inline"> 
       <img src="<%= user.gravatarURL %>" class="md-user-image">
        </div> 
@@ -160,7 +160,7 @@ i.fa {
             </div>
             <div class="flex justify-between">
               <div class="left-icons flex justify-around">
-                <i class="fa fa-share" aria-hidden="true"></i>
+                <i class="fa fa-share shareBtn" aria-hidden="true" data-tweet="<%= tweet.message %>" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <i class="fa fa-retweet retweetBtn <%- tweet.retweetedByLoggedInUser ? 'retweeted' : '' %>" aria-hidden="true" data-tweet="<%= tweet.id %>"> 
                 <%- tweet.retweets > 0 ? tweet.retweets : '' %>
                 </i>
@@ -267,6 +267,9 @@ $(".openChat").click(function () {
 
     });
 })
+
+const notification = new Audio('/audio/notification.mp3');
+
 </script>
   </body>
 </html>

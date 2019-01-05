@@ -317,21 +317,11 @@ $('.retweetBtn').click(e => {
     let buttonClassList = Array.from(e.target.classList);
     
     if(buttonClassList.includes('retweeted')){
-        return toastr.error('You already retweeted this tweet');
-        // data.action = 'like'
-        // button.addClass('liked')
-        // button.addClass('unlikeBtn')
-        // button.removeClass('likeBtn')    
-        // button.html(` ${Number(numLikes) + 1}`);
-        
+        return toastr.error('You already retweeted this tweet');       
     } else {
         data.action = 'retweet'
         button.addClass('retweeted')
         button.html(` ${Number(numRetweets) + 1}`)
-
-         // button.removeClass('unlikeBtn')
-        // button.addClass('likeBtn')
-        
     }
     console.log(data);
        
@@ -351,6 +341,8 @@ $('.retweetBtn').click(e => {
         toastr.error('Sorry, there was a problem with the request','An error occured')  
     })   
 });
+
+
 
 
 
@@ -441,6 +433,7 @@ $('#sendChat').click(e => {
 io.socket.on('chat',e => {
     console.log('new chat event ',e);
     if(e.sender === me.id){
+        notification.play();
         $('#chat_box').append(`
         <div class="chat_message_wrapper chat_message_right">
             <div class="chat_user_avatar">
