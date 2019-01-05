@@ -8,6 +8,7 @@
     "@sailshq/connect-redis": "^3.2.1",
     "@sailshq/lodash": "^3.10.3",
     "@sailshq/socket.io-redis": "^5.2.0",
+    "connect-redis": "^3.4.0",
     "grunt": "1.0.1",
     "machinepack-datetime": "^1.4.0",
     "machinepack-gravatar": "^2.0.0",
