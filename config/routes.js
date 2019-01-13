@@ -22,6 +22,7 @@ module.exports.routes = {
   'GET /': 'PageController.index',
   'GET /users/:handle' : 'PageController.index',
   'GET /login' : { view : 'pages/login'},
+  'GET /register' : { view : 'pages/register'},
   'GET /logout' : 'UserController.logout',
   'POST /signup' : 'UserController.signup',
   'POST /signin' : 'UserController.signin',
