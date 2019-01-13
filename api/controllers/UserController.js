@@ -10,6 +10,18 @@ const Gravatar = require('machinepack-gravatar');
 module.exports = {
   
     signup : async function(req,res){
+        if(!req.param('username')){
+            return res.json({error : 'You have to provide a username'});
+        }
+        if(!req.param('handle')){
+            return res.json({error : 'You have to provide a Handle'});
+        }
+        if(!req.param('email')){
+            return res.json({error : 'You have to provide an email'});
+        }
+        if(!req.param('password')){
+            return res.json({error : 'You have to provide a password'});
+        }
 
         let data = {
             username : req.param('username'),
@@ -48,6 +60,13 @@ module.exports = {
     },
 
     signin: function(req,res){
+        if(!req.param('emailOrHandle')){
+            return res.json({error : 'You have to provide an email or Handle'});
+        }
+        if(!req.param('password')){
+            return res.json({error : 'You have to provide a password'});
+        }
+        
         User.findOne({
             or : [
                 { email : req.param('emailOrHandle')},

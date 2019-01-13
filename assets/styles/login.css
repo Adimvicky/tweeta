@@ -243,6 +243,9 @@
   .sign-in {
     transition-timing-function: ease-out;
   }
+  .mobile-signup {
+    display: none;
+  }
   .cont.s--signup .sign-in {
     transition-timing-function: ease-in-out;
     transition-duration: 1.2s;
@@ -276,5 +279,12 @@
   .icon-link--twitter {
     left: auto;
     right: 5px;
+  } */
+
+  /* @media only screen and (max-width : 900px){
+    .mobile-signup {
+      display: block;
+    }
+
   } */
   

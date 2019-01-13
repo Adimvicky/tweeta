@@ -1,9 +1,8 @@
-# tweeta
+# Tweeta
 
-a [Sails v1](https://sailsjs.com) application
+<!-- a [Sails v1](https://sailsjs.com) application
 
-
-### Links
+ ### Links
 
 + [Sails framework documentation](https://sailsjs.com/get-started)
 + [Version notes / upgrading](https://sailsjs.com/documentation/upgrading)
@@ -14,7 +13,7 @@ a [Sails v1](https://sailsjs.com) application
 
 ### Version info
 
-This app was originally generated on Sat Dec 29 2018 15:12:10 GMT-0800 (Pacific Standard Time) using Sails v1.1.0.
+This app was originally generated on Sat Dec 29 2018 15:12:10 GMT-0800 (Pacific Standard Time) using Sails v1.1.0. -->
 
 <!-- Internally, Sails used [`sails-generate@1.16.2`](https://github.com/balderdashy/sails-generate/tree/v1.16.2/lib/core-generators/new). -->
 

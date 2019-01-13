@@ -10,12 +10,12 @@ body, html {
 html{
   font-size: 16px;
 }
-body {
+/* body {
   background-color: #F3EEE8;
-}
+} */
 header{
   height: 4em;
-  background-color: #FFFBF5;
+  background-color: #fff;
   margin-bottom: 2em;
 }
 *{
@@ -71,13 +71,13 @@ header .fa-twitter{
 }
 .categorybar{
   width: 800px;
-  background: #FFFBF5;
+  background: #fff;
   float: left;
   padding: 0;
   margin-bottom: 2em;
 }
 .category{
-  padding: 20px 0;
+  padding: 10px 0;
   width: 196px;
   display: inline-block;
   cursor: pointer;
@@ -95,11 +95,11 @@ header .fa-twitter{
 }
 .tweets{
   width: 800px;
-  background-color: #FFFBF5;
+  background-color: #FFF;
 }
 .tweet{
   width: 100%;
-  padding: 30px;
+  padding: 20px;
   border-bottom: 1px solid #e1e8ed;
 }
 .tweet-pic{
@@ -139,15 +139,26 @@ header .fa-twitter{
 header{
   justify-content: space-between;
 }
+.retweeted {
+  color : green;
+}
+::-webkit-input-placeholder { 
+  text-align : left;
+}
+i.fa {
+  cursor : pointer;
+}
+.liked {
+  color : red;
+}
+#container {
+  background-color: #fff;
+}
 
-@media (max-width: 850px){
-  header{
-    flex-wrap: wrap;
-    height: 8em;
-    justify-content: center;
-  }
+@media (max-width: 770px){
   .categorybar{
     width: 100%;
+    margin : 8px auto;
   }
   .category{
     width: 48%;
@@ -156,9 +167,24 @@ header{
   .tweets{
     width: 100%;
   }
+  #container {
+    width : 100%;
+  }
+  #search {
+    display: none;
+  }
+}
+
+@media only screen and (max-width : 700px){
+ .joined {
+   display: none;
+ }
+}
+
+@media only screen and (max-width : 600px){
+  .btn.btn-sm {
+    width : 90px;
+  }
 }
 
 
-.retweeted {
-    color : green;
-}

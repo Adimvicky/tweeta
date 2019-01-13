@@ -61,7 +61,7 @@ $('#getUsersBtn').click(e => {
                   ${user.username}
                 </span>
                 <span class="handle">
-                  ${user.handle} (Joined  ${user.created})
+                  ${user.handle} <span class="joined">(Joined  ${user.created}) </span>
                 </span>
               </div>
               <div >
@@ -193,7 +193,7 @@ $('#getFollowingBtn').click(e => {
                   ${followee.username}
                 </span>
                 <span class="handle">
-                  ${followee.handle} (Joined  ${followee.created})
+                  ${followee.handle} <span class="joined">(Joined ${followee.created})</span>
                 </span>
               </div>
               <div >
@@ -242,7 +242,7 @@ $('#getFollowersBtn').click(e => {
                   ${follower.username}
                 </span>
                 <span class="handle">
-                  ${follower.handle} (Joined  ${follower.created})
+                  ${follower.handle} <span class="joined">Joined  ${follower.created})</span>
                 </span>
               </div>
               <div >
@@ -432,6 +432,8 @@ $('#sendChat').click(e => {
        
     })
 })
+
+
 
 
 io.socket.on('chat',e => {

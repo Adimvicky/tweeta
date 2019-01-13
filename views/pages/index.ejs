@@ -1,42 +1,19 @@
 <html>
-  <head>
-     
+  <head>   
   </head>
   <body>
-  <%- exposeLocalsToBrowser() %>
-  <style>
-  ::-webkit-input-placeholder { 
-  text-align : left;
-}
-i.fa {
-  cursor : pointer;
-}
-.liked {
-  color : red;
-}
-  </style>
- 
-    
+  <%- exposeLocalsToBrowser() %>  
   <script>
   
-
    var me = window.SAILS_LOCALS.me ? window.SAILS_LOCALS.me : null;
-   var tweets = window.SAILS_LOCALS.tweets
-   var userCount = window.SAILS_LOCALS.userCount
-   var users = window.SAILS_LOCALS.users
-   var followers = window.SAILS_LOCALS.me.followers.length
-   var following = window.SAILS_LOCALS.me.following.length
-
+   var tweets = window.SAILS_LOCALS.tweets ? window.SAILS_LOCALS.tweets : null;
+   var userCount = window.SAILS_LOCALS.userCount ? window.SAILS_LOCALS.userCount : null;
+   var users = window.SAILS_LOCALS.users ? window.SAILS_LOCALS.users : null;
+   var followers = window.SAILS_LOCALS.me.followers.length ? window.SAILS_LOCALS.me.followers.length : null;
+   var following = window.SAILS_LOCALS.me.following.length ? window.SAILS_LOCALS.me.following.length : null;
    
-   
-
-
-   console.log(me);
-   console.log(tweets);
-   console.log(users);
-   
-
   </script>
+
     <header class="flex items-center sticky-top">
       <div class="flex items-center justify-center">
       
@@ -55,10 +32,7 @@ i.fa {
           <i class="fa fa-leaf" aria-hidden="true">     
           </i>
         </div>
-        </div>
-        
-        
-        
+        </div>       
         <div class="dropdown">
         <div class="circle border flex items-center justify-center" title="Message" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -92,7 +66,7 @@ i.fa {
        
       </div>
          <% if(me) {%> 
-      <div class="circle border flex items-center justify-center" title="You">
+      <div class="circle border flex items-center justify-center" id="user-img" title="You">
        <img class="circle border" src="<%= me.gravatarURL %>" /> 
       </div>
      <div id="sign-out">
@@ -160,7 +134,7 @@ i.fa {
             </div>
             <div class="flex justify-between">
               <div class="left-icons flex justify-around">
-                <i class="fa fa-share shareBtn" aria-hidden="true" data-tweet="<%= tweet.message %>" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <i class="fa fa-share shareBtn" aria-hidden="true" data-tweet="<%= tweet.message %>" ></i>
                 <i class="fa fa-retweet retweetBtn <%- tweet.retweetedByLoggedInUser ? 'retweeted' : '' %>" aria-hidden="true" data-tweet="<%= tweet.id %>"> 
                 <%- tweet.retweets > 0 ? tweet.retweets : '' %>
                 </i>
@@ -250,8 +224,12 @@ i.fa {
 </aside>
 <!-- Message pop up end -->
 <script>
-$('#followers').html(followers);
-$('#following').html(following);
+if(followers){
+  $('#followers').html(followers);
+}
+if(following){
+  $('#following').html(following);
+}
 
 document.getElementById('sidebar_secondary').style.display = 'none';
 
@@ -266,9 +244,10 @@ $(".openChat").click(function () {
   document.getElementById('sidebar_secondary').style.display = 'none';
 
     });
-})
+});
 
 const notification = new Audio('/audio/notification.mp3');
+
 
 </script>
   </body>
