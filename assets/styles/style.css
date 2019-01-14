@@ -154,7 +154,7 @@ i.fa {
 #container {
   background-color: #fff;
 }
-.btn.btn-sm {
+button.btn.btn-sm {
   width : 135px;
   border-radius: 25px;
 }
@@ -188,6 +188,7 @@ i.fa {
 @media only screen and (max-width : 600px){
   .btn.btn-sm {
     width : 90px;
+    border-radius: 25px;
   }
 }
 
