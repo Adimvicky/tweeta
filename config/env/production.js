@@ -254,7 +254,7 @@ module.exports = {
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
     // ***************************************************************************/
-    onlyAllowOrigins: [ 'http://localhost'],
+    onlyAllowOrigins: [ 'https://tweeta.cleverapps.io'],
 
 
     /***************************************************************************
