@@ -58,7 +58,13 @@ module.exports = {
       //  sails_datastores__default__url=mysql://admin:myc00lpAssw2D@db.example.com:3306/my_prod_db
       //  ```
       //--------------------------------------------------------------------------
-
+      url : process.env.MONGODB_ADDON_URI,
+      adapter : 'sails-mongo',
+      host : process.env.MONGODB_ADDON_HOST,
+      database : process.env.MONGODB_ADDON_DB,
+      user : process.env.MONGODB_ADDON_USER,
+      password : process.env.MONGODB_ADDON_PASSWORD,
+      port : process.env.MONGODB_ADDON_PORT 
       /****************************************************************************
       *                                                                           *
       * More adapter-specific options                                             *
@@ -148,9 +154,7 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      // allowOrigins: [
-      //   'https://example.com',
-      // ]
+      allowOrigins: []
     },
 
   },
@@ -249,11 +253,8 @@ module.exports = {
     * > Replace "https://example.com" etc. with the URL(s) of your app.        *
     * > Be sure to use the right protocol!  ("http://" vs. "https://")         *
     *                                                                          *
-    ***************************************************************************/
-    // onlyAllowOrigins: [
-    //   'https://example.com',
-    //   'https://staging.example.com',
-    // ],
+    // ***************************************************************************/
+    onlyAllowOrigins: [ 'http://localhost'],
 
 
     /***************************************************************************
@@ -322,7 +323,7 @@ module.exports = {
     * (https://sailsjs.com/config/http)                                        *
     *                                                                          *
     ***************************************************************************/
-    // trustProxy: true,
+     trustProxy: true,
 
   },
 
