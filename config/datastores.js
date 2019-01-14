@@ -18,9 +18,16 @@
 
 module.exports.datastores = {
   default : {
-    adapter : 'sails-mongo',
-    host : 'localhost',
-    database : 'tweeta' 
+    // adapter : 'sails-mongo',
+    // host : 'localhost',
+    // database : 'tweeta' 
+      url : process.env.MONGODB_ADDON_URI,
+      adapter : 'sails-mongo',
+      host : process.env.MONGODB_ADDON_HOST,
+      database : process.env.MONGODB_ADDON_DB,
+      user : process.env.MONGODB_ADDON_USER,
+      password : process.env.MONGODB_ADDON_PASSWORD,
+      port : process.env.MONGODB_ADDON_PORT 
   }
     
 }
