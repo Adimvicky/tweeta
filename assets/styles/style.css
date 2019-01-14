@@ -154,6 +154,10 @@ i.fa {
 #container {
   background-color: #fff;
 }
+.btn.btn-sm {
+  width : 135px;
+  border-radius: 25px;
+}
 
 @media (max-width: 770px){
   .categorybar{
@@ -191,3 +195,6 @@ img.signin-icon {
   margin-bottom : 40px;
 }
 
+i.fa-remove {
+  color : #fff;
+}
