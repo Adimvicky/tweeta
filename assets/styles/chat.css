@@ -100,10 +100,10 @@ a:focus {
     
     height: 342px;
     overflow-y: scroll;
-    width: 316px;
+    width: 100%;
 }
 aside {
-     background-attachment: fixed;
+    background-attachment: fixed;
     background-clip: border-box;
     background-color: rgba(0, 0, 0, 0);
     background-image: url("https://scontent.fluh1-1.fna.fbcdn.net/v/t1.0-9/12670232_624826600991767_3547881030871377118_n.jpg?oh=226475bcd22faf19705858eb58e776cd&oe=59CE39E7");
@@ -120,7 +120,7 @@ aside {
     font-family: 'Open Sans', sans-serif;
 }
 .chat_box {
-    padding: 16px;
+    padding: 3px;
     background:#78A7CE none repeat scroll 0 0;
 }
 .chat_box .chat_message_wrapper::after {
@@ -266,7 +266,7 @@ img {
 }
 .gurdeep-chat-box {
     background: #fff none repeat scroll 0 0;
-    border-radius: 5px;
+    border-radius: 25px;
     float: left;
     padding: 3px;
 }
@@ -293,4 +293,10 @@ img {
     border-collapse: separate;
     display: table;
     position: relative;
+}
+
+@media only screen and (max-width : 480px){
+    #sendChat .fa-send{
+        margin-left : 1px;
+    }
 }
