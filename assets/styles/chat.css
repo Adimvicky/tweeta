@@ -42,7 +42,7 @@ a:focus {
     width: 26px;
 }
 .popup-head-right {
-    margin: 9px 0 0;
+    margin: 0 0 0;
 }
 .popup-head .btn-group {
     margin: -5px 3px 0 -1px;
@@ -77,12 +77,12 @@ a:focus {
     color: #fff;
 }
 .popup-head {
-    background: #085e72 none repeat scroll 0 0 !important;
-    border-bottom: 3px solid #ccc;
+    background: none repeat scroll 0 0 !important;
+    border-bottom: 2px solid #fff;
     color: #fff;
     display: table;
     width: 100%;
-    padding: 8px;
+    padding: 10px;
 }
 .popup-head .md-user-image {
     border: 2px solid #5a7172;
@@ -110,8 +110,9 @@ aside {
     background-origin: padding-box;
     background-position: center top;
     background-repeat: repeat;
-    border: 1px solid #304445;
-    bottom: 0;
+    border: 1px solid;
+    bottom: 10px;
+    border-radius: 25px;
     display: none;
     height: 80vh;
     position: fixed;
@@ -295,8 +296,20 @@ img {
     position: relative;
 }
 
+#sendChat .fa-send {
+    color : white;
+    margin-right : 40px;
+    font-size: 20px;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+
 @media only screen and (max-width : 480px){
     #sendChat .fa-send{
-        margin-left : 1px;
+        margin-left : 7px;
+        margin-right: 20px;
+    }
+    aside {
+        right: 30px;
     }
 }
