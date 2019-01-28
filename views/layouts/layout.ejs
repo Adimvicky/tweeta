@@ -12,6 +12,14 @@
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+    <script>
+     let loc = window.location.href;
+
+    if(loc.indexOf('https') !== 0 && loc.indexOf('http://localhost') !== 0){
+       window.location = 'https://tweeta.cleverapps.io';
+    }
+    
+    </script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
       
       <script src="/dependencies/popper.js"></script> 

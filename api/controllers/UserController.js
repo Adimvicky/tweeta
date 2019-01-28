@@ -23,40 +23,52 @@ module.exports = {
             return res.json({error : 'You have to provide a password'});
         }
 
-        let data = {
-            username : req.param('username'),
-            handle : req.param('handle'),
-            email : req.param('email'),
-        };
-
-        if(data.handle.indexOf('@') !== 0){
-            data.handle = '@'+data.handle;
-        }
-
-        try {   
-            data.password = await sails.helpers.hashpassword(req.param('password'));
-            data.gravatarURL = Gravatar.getImageUrl({
-                emailAddress : req.param('email')
-            }).execSync()
-        } catch(err){
-            return res.json({error : 'some error ocurred'});
-        }
-    
-        User.create(data)
-        .fetch()
-        .exec((err,createdUser) => {
+        User.findOne({email : req.param('email')})
+        .exec(async(err,foundUser) => {
             if(err){
-                if(err.code === 'E_UNIQUE'){
-                    return res.json({error : 'Sorry,the email or handle you chose has already been taken, please try a different one'});
+                return res.json({error : `A user with the email ${req.param('email')} already exists.`})
+            } else {
+                let data = {
+                    username : req.param('username'),
+                    handle : req.param('handle'),
+                    email : req.param('email'),
+                };
+        
+                if(data.handle.indexOf('@') !== 0){
+                    data.handle = '@'+data.handle;
                 }
+        
+                try {   
+                    data.password = await sails.helpers.hashpassword(req.param('password'));
+                    data.gravatarURL = Gravatar.getImageUrl({
+                        emailAddress : req.param('email')
+                    }).execSync()
+                } catch(err){
+                    return res.json({error : 'some error ocurred'});
+                }
+            
+                User.create(data)
+                .fetch()
+                .exec((err,createdUser) => {
+                    if(err){
+                        if(err.code === 'E_UNIQUE'){
+                            return res.json({error : 'Sorry,the email or handle you chose has already been taken, please try a different one'});
+                        }
+                    }
+                    if(!createdUser) return res.serverError({error : 'Could not create user,please check that your email is in the right format'});
+        
+                    req.session.userId = createdUser.id;
+        
+                    delete createdUser.password;
+                    return res.json({data : createdUser});
+                })
+
             }
-            if(!createdUser) return res.serverError({error : 'Could not create user,please check that your email is in the right format'});
-
-            req.session.userId = createdUser.id;
-
-            delete createdUser.password;
-            return res.json({data : createdUser});
         })
+        
+
+
+        
     },
 
     signin: function(req,res){
