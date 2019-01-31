@@ -70,6 +70,7 @@ a:focus {
     border-radius: 7px;
     font-family: oswald;
     padding: 3px;
+   -webkit-transition: all 0.3s ease-in-out 0s;
    transition: all 0.3s ease-in-out 0s;
 }
 .gurdeepoushan .dropdown-menu li a:hover {
@@ -143,7 +144,8 @@ aside {
 }
 img {
     border: 0 none;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     height: auto;
     max-width: 100%;
     vertical-align: middle;
@@ -283,7 +285,8 @@ img {
 }
 .chat_submit_box {
     bottom: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     left: 0;
     overflow: hidden;
     padding: 10px;

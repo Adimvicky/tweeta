@@ -1,7 +1,3 @@
-/* $page-font-size: 16px;
-$body-color: #F3EEE8;
-$timeline-color: #FFFBF5;
-$header-color: #FFFBF5; */
 
 body, html {
   height: 100%;
@@ -10,16 +6,15 @@ body, html {
 html{
   font-size: 16px;
 }
-/* body {
-  background-color: #F3EEE8;
-} */
+
 header{
   height: 4em;
   background-color: #fff;
   margin-bottom: 2em;
 }
 *{
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 *:focus {
   outline: 0;
@@ -107,7 +102,8 @@ header .fa-twitter{
   height: 50px;
   border-color: #e1e8ed;
   margin: 0 10px;
-  flex-shrink: 0
+  -ms-flex-negative: 0;
+      flex-shrink: 0
 }
 .tweet-pic .fa-user{
   font-size: 30px;
@@ -137,7 +133,9 @@ header .fa-twitter{
 }
 
 header{
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .retweeted {
   color : green;
