@@ -407,6 +407,7 @@ $('.openChat').click(e => {
             $('#otherUser').html(otherUser);
         }
         if(response.error){
+            $('#sidebar_secondary').removeClass('popup-box-on');
             toastr.error(response.error)
         }
         
