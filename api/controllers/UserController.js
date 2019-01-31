@@ -85,7 +85,6 @@ module.exports = {
                 { handle : req.param('emailOrHandle')}
             ]
         })
-        .limit(1)
         .populate('followers')
         .populate('following')
         .exec(async(err,foundUser) => {
