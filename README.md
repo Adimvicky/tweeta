@@ -1,4 +1,4 @@
 # Tweeta
 
-### A twitter clone built with [sailsjs](sailsjs.com) - A MVC framework for nodejs
+#### A twitter clone built with Sailsjs - An MVC framework for nodejs
 
