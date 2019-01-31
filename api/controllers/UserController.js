@@ -135,16 +135,18 @@ module.exports = {
         })
     },
     
-    followUser : function(req,res){
-        User.findOne({id : req.session.userId})
-        .exec(async(err,loggedInUser) => {
-            if(err) return res.negotiate(err);
+    followUser : async function(req,res){
+        
+            let loggedInUser = await User.find({id : req.session.userId}).limit(1);
+
             if(!loggedInUser) return res.json({error : 'You have to be logged in first'});
             if(req.session.userId === req.param('userToFollow')){
                 return res.json({error : `Sorry,You can't follow yourself`});
             }
 
-            await User.addToCollection(req.param('userToFollow'),'followers').members(loggedInUser.id)
+            loggedInUser = loggedInUser[0];
+
+             User.addToCollection(req.param('userToFollow'),'followers').members(loggedInUser.id)
             .exec((err) => {
                 if(err) return res.negotiate(err);
                 
@@ -157,8 +159,6 @@ module.exports = {
                     return res.json({data : userData})
                 })
             })
-            
-        })
     },
 
     unfollowUser : function(req,res){
