@@ -82,7 +82,8 @@ module.exports = {
         User.findOne({
             or : [
                 { email : req.param('emailOrHandle')},
-                { handle : req.param('emailOrHandle')}
+                { handle : req.param('emailOrHandle')},
+                { username : req.param('username')}
             ]
         })
         .populate('followers')
