@@ -308,7 +308,6 @@ img {
 @media only screen and (max-width : 480px){
     #sendChat .fa-send{
         margin-left : 7px;
-        margin-right: 20px;
     }
     aside {
         right: 30px;
