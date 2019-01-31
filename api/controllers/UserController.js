@@ -83,9 +83,10 @@ module.exports = {
             or : [
                 { email : req.param('emailOrHandle')},
                 { handle : req.param('emailOrHandle')},
-                { username : req.param('username')}
+                { username : req.param('emailOrHandle')}
             ]
         })
+        .limit(1)
         .populate('followers')
         .populate('following')
         .exec(async(err,foundUser) => {
