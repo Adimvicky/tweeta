@@ -1,10 +1,3 @@
-/**
- * ChatRoomController
- *
- * @description :: Server-side actions for handling incoming requests.
- * @help        :: See https://sailsjs.com/docs/concepts/actions
- */
-
 module.exports = {
     joinChat : function(req,res){
         if(!req.session.userId){

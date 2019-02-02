@@ -73,7 +73,7 @@ module.exports = {
 
     signin: function(req,res){
         if(!req.param('emailOrHandle')){
-            return res.json({error : 'You have to provide an email or Handle'});
+            return res.json({error : 'You have to provide your email or Handle'});
         }
         if(!req.param('password')){
             return res.json({error : 'You have to provide a password'});
@@ -105,7 +105,7 @@ module.exports = {
                  return res.json({data : foundUser});
                 
             } else {
-                return res.json({error : `The password doesnt match the user's password`});
+                return res.json({error : `The password doesn't match ${req.param('emailOrHandle')}'s password`});
             }
         })
     },
@@ -141,7 +141,7 @@ module.exports = {
 
             if(!loggedInUser) return res.json({error : 'You have to be logged in first'});
             if(req.session.userId === req.param('userToFollow')){
-                return res.json({error : `Sorry,You can't follow yourself`});
+                return res.json({error : `You can't follow yourself`});
             }
 
             loggedInUser = loggedInUser[0];
@@ -167,7 +167,7 @@ module.exports = {
             if(err) return res.negotiate(err);
             if(!loggedInUser) return res.json({error : 'You have to be logged in first'});
             if(req.session.userId === req.param('userToUnfollow')){
-                return res.json({error : `Sorry,You can't unfollow yourself`});
+                return res.json({error : `You can't unfollow yourself`});
             }
 
             await User.removeFromCollection(req.param('userToUnfollow'),'followers').members(loggedInUser.id)
@@ -191,7 +191,7 @@ module.exports = {
         .populate('following')
         .exec((err,loggedInUser) => {
             if(err) return res.negotiate(err);
-            if(!loggedInUser) return res.json({error : `I cant show you people you follow if i don't know who you are, please login first`});
+            if(!loggedInUser) return res.json({error : `I cant show you people you follow if you are not logged in. Please login first`});
             
             delete loggedInUser.password;
             _.each(loggedInUser.following, followee => {
@@ -207,7 +207,7 @@ module.exports = {
         .populate('followers')
         .exec((err,loggedInUser) => {
             if(err) return res.negotiate(err);
-            if(!loggedInUser) return res.json({error : `I cant show you people who follow you if i don't know who you are, please login first`});
+            if(!loggedInUser) return res.json({error : `I cant show you people who follow you if you are not logged in. Please login first`});
             
             delete loggedInUser.password;
             _.each(loggedInUser.followers, follower => {

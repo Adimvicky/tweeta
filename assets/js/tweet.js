@@ -23,4 +23,29 @@ $('#tweetBtn').click(e => {
 });
 
 
+$('.deleteTweetBtn').click(e => {
+    let tweet = e.target.getAttribute('data-tweet');
+    $.ajax({
+        url : '/tweets/delete',
+        method : 'DELETE',
+        data : {
+            tweet
+        }
+    })
+    .done(response => {
+        if(response.error){
+            toastr.error(response.error,'An error occured')
+        }
+        if(response.data){
+            toastr.info('Tweet deleted');
+            $(`#${tweet}-tweet-box`).remove();
+        } 
+    })
+    .catch(err => {
+        toastr.error('An error occured','Something went wrong');
+    })
+
+})
+
+
 

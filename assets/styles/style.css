@@ -121,6 +121,12 @@ header .fa-twitter{
 .tweet-content .fa{
   padding-right: 15px;
 }
+.dropdown-item {
+  cursor: pointer;
+}
+.dropdown-item .deleteTweetBtn {
+  padding-right: 3px;
+}
 .actual-content{
   padding: 15px 0;
 }

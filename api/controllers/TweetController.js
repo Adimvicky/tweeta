@@ -17,7 +17,7 @@ module.exports = {
         .populate('tweets')
         .exec((err,foundUser) => {
             if(err) return res.negotiate(err);
-            if(!foundUser) return res.json('No user found');
+            if(!foundUser) return res.json({error : 'Please login first'});
 
             let tweetData = {
                 message : req.param('tweet'),
@@ -28,13 +28,13 @@ module.exports = {
             .fetch()
             .exec((err,createdTweet) => {
                 if(err) return res.negotiate(err);
-                if(!createdTweet) return res.json({error : 'No tweet created'});
+                if(!createdTweet) return res.json({error : 'Tweet could not be created'});
 
                 User.findOne({id : req.session.userId})
                 .exec((err,user) => {
-                    if(err) return res.json({error : 'Error ocurred'});
+                    if(err) return res.json({error : 'Sorry,Error ocurred'});
                     if(!user){
-                        return res.json({error : 'No user'})
+                        return res.json({error : 'Please login first'})
                     }
                     createdTweet.username = user.username;
 
@@ -115,6 +115,33 @@ module.exports = {
                 }
             })
         })       
+    },
+
+    delete : function(req,res){
+        if(!req.session.userId){
+            return res.json({error : 'You have to logged in first'});
+        }
+        if(!req.param('tweet')){
+            return res.json({error : 'Seems you did not specify a tweet to delete'});
+        }
+
+        User.findOne({id : req.session.userId})
+        .exec((err,loggedInUser) => {
+            if(err) return res.json({error : 'Sorry, an error occured'});
+            if(!loggedInUser) return res.json({error : 'Seems you are not logged in'});
+
+            if(loggedInUser.id !== req.session.userId){
+                return res.json({error : "You can't delete someone else's tweet"});
+            }
+
+            Tweet.destroyOne({id : req.param('tweet')})
+            .exec((err,deletedTweet) => {
+                if(err) return res.json({error : 'Sorry, an error occured'});
+                if(!deletedTweet) return res.json({error : 'No tweet was deleted'});
+                
+                return res.json({data : `${req.param('tweet')} deleted`});
+            })
+        })
     }
   
 

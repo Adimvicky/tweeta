@@ -112,7 +112,7 @@
       <div class="tweets">
      <% if(tweets){ %>
      <%  for(let tweet of tweets) { %>
-        <div class="tweet flex justify-between">
+        <div class="tweet flex justify-between" id="<%= tweet.id %>-tweet-box">
           <div class="tweet-pic circle border flex items-center justify-center">
             <img class="circle border" src="<%=  tweet.owner.gravatarURL %>" style="height : 47px"/> 
           </div>
@@ -144,10 +144,24 @@
                 <i class="fa fa-heart likeOrUnlikeButton <%- tweet.likedByLoggedInUser ? 'unlikeBtn liked' : 'likeBtn' %>" aria-hidden="true" data-tweet="<%= tweet.id %>">
                 <%- tweet.likes > 0 ? tweet.likes : '' %>
                 </i>
-                <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+
+                
               </div>
-              <div>
-                <i class="fa fa-expand" aria-hidden="true"></i>
+              <div> 
+                
+                <div class="dropdown">
+                <i class="fa fa-ellipsis-h" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-hidden="true"></i>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+
+                  <% if(me && tweet.owner.id === me.id){ %>
+                  <div class="dropdown-item deleteTweetBtn" data-tweet="<%= tweet.id %>">
+                  <i class="fa fa-trash"></i> Delete
+                  </div>
+                <% } %> 
+
+                  </div>
+
+                </div>
               </div>
             </div>
           </div>
