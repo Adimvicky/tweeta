@@ -155,7 +155,7 @@
 
                   <% if(me && tweet.owner.id === me.id){ %>
                   <div class="dropdown-item deleteTweetBtn" data-tweet="<%= tweet.id %>">
-                  <i class="fa fa-trash"></i> Delete
+                  <i class="fa fa-trash" data-tweet="<%= tweet.id %>"></i> Delete
                   </div>
                 <% } %> 
 

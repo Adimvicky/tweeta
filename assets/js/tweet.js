@@ -25,6 +25,7 @@ $('#tweetBtn').click(e => {
 
 $('.deleteTweetBtn').click(e => {
     let tweet = e.target.getAttribute('data-tweet');
+    console.log('clicked ',tweet);
     $.ajax({
         url : '/tweets/delete',
         method : 'DELETE',
