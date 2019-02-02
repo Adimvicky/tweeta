@@ -33,6 +33,7 @@ $('.deleteTweetBtn').click(e => {
         }
     })
     .done(response => {
+        console.log(response);
         if(response.error){
             toastr.error(response.error,'An error occured')
         }
