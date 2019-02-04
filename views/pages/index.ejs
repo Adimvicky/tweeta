@@ -155,7 +155,10 @@
 
                   <% if(me && tweet.owner.id === me.id){ %>
                   <div class="dropdown-item deleteTweetBtn" data-tweet="<%= tweet.id %>">
-                  <i class="fa fa-trash" data-tweet="<%= tweet.id %>"></i> Delete
+                  <i class="fa fa-trash" data-tweet="<%= tweet.id %>"></i> <span data-tweet="<%= tweet.id %>">Delete</span>
+                  </div>
+                  <div class="dropdown-item editTweetModalBtn" data-tweet="<%= tweet.id %>" data-tweetMessage="<%= tweet.message %>" data-toggle="modal" data-target="#exampleModalCenter2">
+                  <i class="fa fa-pencil" data-tweet="<%= tweet.id %>" data-tweetMessage="<%= tweet.message %>"></i> <span data-tweet="<%= tweet.id %>" data-tweetMessage="<%= tweet.message %>"> Edit tweet </span>
                   </div>
                 <% } %> 
 
@@ -185,7 +188,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">New tweet</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">New Tweet</h5>
       </div>
       
       <div class="modal-body">
@@ -203,6 +206,30 @@
 </div>
 
 <!-- Tweet Modal -->
+
+<!-- Update Tweet Modal -->
+    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle2">Update Tweet</h5>
+      </div>
+      
+      <div class="modal-body">
+      <textarea class="form-control" id="tweetEdit"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-danger" data-dismiss="modal">&times;</button>
+        <button type="button" class="btn btn-primary" id="updateTweetBtn">
+            <i class="fa fa-twitter" aria-hidden="true"></i>
+        </button>
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<!-- Update Tweet Modal -->
 
 
 <!-- Message pop up -->

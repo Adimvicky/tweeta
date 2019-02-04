@@ -24,14 +24,37 @@ module.exports = {
                 owner : foundUser.id
             }
 
-            Tweet.create(tweetData)
-            .fetch()
-            .exec((err,createdTweet) => {
-                if(err) return res.negotiate(err);
-                if(!createdTweet) return res.json({error : 'Tweet could not be created'});
+            // Check if this is a request to update an already existent tweet
+            if(req.param('tweetToUpdate')){
 
-                User.findOne({id : req.session.userId})
-                .exec((err,user) => {
+                Tweet.findOne({id : req.param('tweetToUpdate')})
+                .exec((err,tweet) => {
+                    if(err) return res.negotiate(err);
+                    if(!tweet) return res.json({error : 'Sorry, but it seems you previously deleted this tweet'});
+
+                    if(tweet.owner !== foundUser.id){
+                        return res.json({error : 'You do not have permission to edit this tweet'});
+                    }
+
+                    Tweet.updateOne({id : req.param('tweetToUpdate')},{message : req.param('tweet')})
+                    .exec((err,updatedTweet) => {
+                        if(err) return res.negotiate(err);
+                        if(!updatedTweet) return res.json({error : 'Tweet could not be updated'});
+
+                        return res.json({data : 'Tweet edited successfully'})
+
+                    })
+                }) 
+
+            } else {
+                Tweet.create(tweetData)
+               .fetch()
+               .exec((err,createdTweet) => {
+                   if(err) return res.negotiate(err);
+                   if(!createdTweet) return res.json({error : 'Tweet could not be created'});
+
+                  User.findOne({id : req.session.userId})
+                  .exec((err,user) => {
                     if(err) return res.json({error : 'Sorry,Error ocurred'});
                     if(!user){
                         return res.json({error : 'Please login first'})
@@ -42,6 +65,10 @@ module.exports = {
                 })
                 
             })
+
+            }
+
+            
         })
     },
 

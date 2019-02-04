@@ -124,9 +124,17 @@ header .fa-twitter{
 .dropdown-item {
   cursor: pointer;
 }
-.dropdown-item .deleteTweetBtn {
+.dropdown-item .fa {
   padding-right: 3px;
 }
+
+@media only screen and (max-width : 950px){
+  .dropdown-item span {
+    display: none;
+  }
+}
+
+
 .actual-content{
   padding: 15px 0;
 }
